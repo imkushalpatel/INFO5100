@@ -25,15 +25,15 @@ public class MainJFrame extends javax.swing.JFrame {
     CardLayout cardLayout;
     DetailsPanel detailsPanel;
     User user;
-    
+
     public MainJFrame() {
         initComponents();
         user = new User();
-        detailsPanel = new DetailsPanel(mainPanel, user);
+//        detailsPanel = new DetailsPanel(mainPanel, user);
         cardLayout = (CardLayout) mainPanel.getLayout();
-        mainPanel.add(detailsPanel, DETAILPANEL);
+//        mainPanel.add(detailsPanel, DETAILPANEL);
         imageView.setIcon(new ImageIcon(new ImageIcon("src/labthree/profile.jpg").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)));
-        
+
     }
 
     /**
@@ -246,7 +246,7 @@ public class MainJFrame extends javax.swing.JFrame {
             imageView.setIcon(new ImageIcon(new ImageIcon(chooser.getSelectedFile().getAbsolutePath()).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)));
             user.setImagePath(chooser.getSelectedFile().getAbsolutePath());
         }
-        
+
 
     }//GEN-LAST:event_uploadImageButtonActionPerformed
 
@@ -256,6 +256,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void viewUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserButtonActionPerformed
         // TODO add your handling code here:
+        detailsPanel = new DetailsPanel(mainPanel, user);
+        mainPanel.add(detailsPanel, DETAILPANEL);
         cardLayout.show(mainPanel, DETAILPANEL);
     }//GEN-LAST:event_viewUserButtonActionPerformed
 
