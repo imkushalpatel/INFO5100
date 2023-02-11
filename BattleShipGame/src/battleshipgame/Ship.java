@@ -6,8 +6,6 @@ public class Ship {
     private int size;
     private int value;
     Coordinate coordinate = new Coordinate();
-    
-    
 
     public String getId() {
         return id;

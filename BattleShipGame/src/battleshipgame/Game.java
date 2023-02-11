@@ -51,6 +51,22 @@ public class Game {
         this.players = players;
     }
 
+    public void addPlayer(Player p) {
+        players.add(p);
+    }
+
+    public void removePlayer(Player p) {
+        players.remove(p);
+    }
+
+    public void addRound(Round r) {
+        rounds.add(r);
+    }
+
+    public void removeRound(Round r) {
+        rounds.remove(r);
+    }
+
     public void startRound() {
 
     }

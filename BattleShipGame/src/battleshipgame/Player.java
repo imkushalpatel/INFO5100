@@ -41,8 +41,30 @@ public class Player {
     public void setShips(List<Ship> ships) {
         this.ships = ships;
     }
-    
-    
+
+    public void addShip(Ship s) {
+        ships.add(s);
+    }
+
+    public void removeShip(Ship s) {
+        ships.remove(s);
+    }
+
+    public void removeShip(int index) {
+        ships.remove(index);
+    }
+
+    public void addTorpedo(Torpedo t) {
+        torpedos.add(t);
+    }
+
+    public void removeTorpedo(Torpedo t) {
+        torpedos.remove(t);
+    }
+
+    public void removeTorpedo(int index) {
+        torpedos.remove(index);
+    }
 
     public void placeShip() {
 
