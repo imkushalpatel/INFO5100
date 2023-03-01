@@ -22,7 +22,7 @@ public class DetailsPanel extends javax.swing.JPanel {
     JPanel mainPanel;
     CardLayout cardLayout;
     User user;
-    
+
     public DetailsPanel(JPanel mainPanel, User user) {
         initComponents();
         this.user = user;
@@ -30,15 +30,10 @@ public class DetailsPanel extends javax.swing.JPanel {
         cardLayout = (CardLayout) mainPanel.getLayout();
         firstNameLabel.setText(user.getFirstName());
         lastNameLabel.setText(user.getLastName());
-        ageLabel.setText(String.valueOf(user.getAge()));
-        cityLabel.setText(user.getCity());
-        addressLabel.setText(user.getAddress());
         phoneLabel.setText(user.getPhone());
         emailLabel.setText(user.getEmail());
-        countryLable.setText(user.getCountry());
-        majorLabel.setText(user.getMajor());
-        imageView.setIcon(new ImageIcon(new ImageIcon(user.getImagePath()).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)));
-        
+        imageView.setIcon(new ImageIcon(user.getProfileImage()));
+
     }
 
     /**
