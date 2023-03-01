@@ -4,21 +4,60 @@
  */
 package data;
 
+import java.awt.Image;
+import java.time.LocalDate;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author imkus
  */
 public class User {
+
+    public static final String EMPLOYEEIDINITIAL = "EMP";
+    static int employeeIdCount = 0;
+
     String firstName;
     String lastName;
-    int age;
+    String employeeId;
+
+    public enum Gender {
+        MALE, FEMALE, OTHER;
+
+    }
+    Gender gender;
+    LocalDate birthDate;
+    LocalDate startDate;
+
     String phone;
     String email;
-    String address;
-    String city;
-    String country;
-    String major;
-    String imagePath;
+    String level;
+    Image profileImage;
+
+    public User(String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate startDate, String phone, String email, String level) {
+
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.birthDate = birthDate;
+        this.startDate = startDate;
+        this.phone = phone;
+        this.email = email;
+        this.level = level;
+
+    }
+
+    public User() {
+
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void generateEmployeeId() {
+        this.employeeId = User.EMPLOYEEIDINITIAL + User.employeeIdCount++;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -34,6 +73,30 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
     public String getPhone() {
@@ -52,53 +115,24 @@ public class User {
         this.email = email;
     }
 
-    public String getAddress() {
-        return address;
+    public String getLevel() {
+        return level;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setLevel(String level) {
+        this.level = level;
     }
 
-    public String getCity() {
-        return city;
+    public Image getProfileImage() {
+        return profileImage;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setProfileImage(Image profileImage) {
+        this.profileImage = profileImage;
     }
 
-    public String getCountry() {
-        return country;
+    public void setDefaultProfileImage() {
+        this.profileImage = new ImageIcon("src/view/profile.jpg").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getMajor() {
-        return major;
-    }
-
-    public void setMajor(String major) {
-        this.major = major;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-    
-    
 }

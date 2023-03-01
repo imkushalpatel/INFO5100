@@ -29,6 +29,7 @@ public class MainJFrame extends javax.swing.JFrame {
     User user;
 
     public MainJFrame() {
+        
         initComponents();
         user = new User();
 //        detailsPanel = new DetailsPanel(mainPanel, user);
@@ -73,6 +74,7 @@ public class MainJFrame extends javax.swing.JFrame {
         majorField = new javax.swing.JTextField();
         saveUserButton = new javax.swing.JButton();
         viewUserButton = new javax.swing.JButton();
+        datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,6 +132,10 @@ public class MainJFrame extends javax.swing.JFrame {
         addPanelLayout.setHorizontalGroup(
             addPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addPanelLayout.createSequentialGroup()
+                .addGap(275, 275, 275)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(addPanelLayout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addGroup(addPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -143,15 +149,17 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel10))
                 .addGap(89, 89, 89)
                 .addGroup(addPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(majorField, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                    .addComponent(firstNameField)
-                    .addComponent(lastNameField)
-                    .addComponent(ageField)
-                    .addComponent(phoneField)
-                    .addComponent(emailField)
-                    .addComponent(addressField)
-                    .addComponent(cityField)
-                    .addComponent(countryField))
+                    .addComponent(datePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addGroup(addPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(majorField, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                        .addComponent(firstNameField)
+                        .addComponent(lastNameField)
+                        .addComponent(ageField)
+                        .addComponent(phoneField)
+                        .addComponent(emailField)
+                        .addComponent(addressField)
+                        .addComponent(cityField)
+                        .addComponent(countryField)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
                 .addGroup(addPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(uploadImageButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -159,10 +167,6 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(saveUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(viewUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(73, 73, 73))
-            .addGroup(addPanelLayout.createSequentialGroup()
-                .addGap(275, 275, 275)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         addPanelLayout.setVerticalGroup(
             addPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,7 +215,9 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(addPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(majorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         mainPanel.add(addPanel, "ADDPANEL");
@@ -412,6 +418,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField ageField;
     private javax.swing.JTextField cityField;
     private javax.swing.JTextField countryField;
+    private com.github.lgooddatepicker.components.DatePicker datePicker1;
     private javax.swing.JTextField emailField;
     private javax.swing.JTextField firstNameField;
     private javax.swing.JLabel imageView;
