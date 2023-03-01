@@ -6,7 +6,7 @@ package view;
 
 import data.User;
 import java.awt.CardLayout;
-import java.awt.Image;
+import java.time.format.DateTimeFormatter;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -30,6 +30,10 @@ public class DetailsPanel extends javax.swing.JPanel {
         cardLayout = (CardLayout) mainPanel.getLayout();
         firstNameLabel.setText(user.getFirstName());
         lastNameLabel.setText(user.getLastName());
+        birthDateLabel.setText(user.getBirthDate().format(DateTimeFormatter.ISO_DATE));
+        genderLabel.setText(user.getGender().toString());
+        startDateLabel.setText(user.getStartDate().format(DateTimeFormatter.ISO_DATE));
+        levelLabel.setText(user.getLevel());
         phoneLabel.setText(user.getPhone());
         emailLabel.setText(user.getEmail());
         imageView.setIcon(new ImageIcon(user.getProfileImage()));
@@ -56,16 +60,14 @@ public class DetailsPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         firstNameLabel = new javax.swing.JLabel();
         lastNameLabel = new javax.swing.JLabel();
-        ageLabel = new javax.swing.JLabel();
+        birthDateLabel = new javax.swing.JLabel();
+        genderLabel = new javax.swing.JLabel();
+        startDateLabel = new javax.swing.JLabel();
+        levelLabel = new javax.swing.JLabel();
         phoneLabel = new javax.swing.JLabel();
         emailLabel = new javax.swing.JLabel();
-        addressLabel = new javax.swing.JLabel();
-        cityLabel = new javax.swing.JLabel();
-        countryLable = new javax.swing.JLabel();
-        majorLabel = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
         jButton1.setText("Go Back");
@@ -84,19 +86,17 @@ public class DetailsPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Last Name:");
 
-        jLabel3.setText("Age:");
+        jLabel3.setText("DOB:");
 
-        jLabel4.setText("Phone:");
+        jLabel4.setText("Gender:");
 
-        jLabel5.setText("Email:");
+        jLabel5.setText("Start Date:");
 
-        jLabel6.setText("Address:");
+        jLabel6.setText("Level");
 
-        jLabel7.setText("City:");
+        jLabel7.setText("Phone:");
 
-        jLabel8.setText("Country:");
-
-        jLabel9.setText("Major:");
+        jLabel8.setText("Email:");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel10.setText("User Details");
@@ -106,9 +106,8 @@ public class DetailsPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(120, Short.MAX_VALUE)
+                .addContainerGap(188, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9)
                     .addComponent(jLabel6)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -128,14 +127,13 @@ public class DetailsPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(firstNameLabel)
                     .addComponent(lastNameLabel)
-                    .addComponent(ageLabel)
+                    .addComponent(birthDateLabel)
+                    .addComponent(genderLabel)
+                    .addComponent(startDateLabel)
+                    .addComponent(levelLabel)
                     .addComponent(phoneLabel)
-                    .addComponent(emailLabel)
-                    .addComponent(addressLabel)
-                    .addComponent(cityLabel)
-                    .addComponent(countryLable)
-                    .addComponent(majorLabel))
-                .addContainerGap(120, Short.MAX_VALUE))
+                    .addComponent(emailLabel))
+                .addContainerGap(189, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel10)
@@ -144,9 +142,9 @@ public class DetailsPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap()
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,34 +157,30 @@ public class DetailsPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(ageLabel))
+                            .addComponent(birthDateLabel))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(phoneLabel))
+                            .addComponent(genderLabel))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(emailLabel)))
+                            .addComponent(startDateLabel)))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(addressLabel))
+                    .addComponent(levelLabel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(cityLabel)
+                    .addComponent(phoneLabel)
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(countryLable))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(majorLabel))
-                .addContainerGap(79, Short.MAX_VALUE))
+                    .addComponent(emailLabel))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -198,12 +192,10 @@ public class DetailsPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel addressLabel;
-    private javax.swing.JLabel ageLabel;
-    private javax.swing.JLabel cityLabel;
-    private javax.swing.JLabel countryLable;
+    private javax.swing.JLabel birthDateLabel;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JLabel firstNameLabel;
+    private javax.swing.JLabel genderLabel;
     private javax.swing.JLabel imageView;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -215,10 +207,10 @@ public class DetailsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lastNameLabel;
-    private javax.swing.JLabel majorLabel;
+    private javax.swing.JLabel levelLabel;
     private javax.swing.JLabel phoneLabel;
+    private javax.swing.JLabel startDateLabel;
     // End of variables declaration//GEN-END:variables
 }
