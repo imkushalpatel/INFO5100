@@ -8,7 +8,9 @@ import data.User;
 import data.UserDirectory;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -27,12 +29,16 @@ public class MainJFrame extends javax.swing.JFrame {
     AddPanel addPanel;
     UserDirectory userDirectory;
     DefaultTableModel tableModel;
+    TableRowSorter<DefaultTableModel> rowSorter;
 
     public MainJFrame() {
 
         initComponents();
         userDirectory = new UserDirectory();
         cardLayout = (CardLayout) mainPanel.getLayout();
+        tableModel = (DefaultTableModel) userListTable.getModel();
+        rowSorter = new TableRowSorter<>(tableModel);
+        userListTable.setRowSorter(rowSorter);
         populateTable();
     }
 
@@ -54,6 +60,8 @@ public class MainJFrame extends javax.swing.JFrame {
         viewUserButton = new javax.swing.JButton();
         editUserButton = new javax.swing.JButton();
         deleteUserButton = new javax.swing.JButton();
+        filterField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,7 +74,7 @@ public class MainJFrame extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        jLabel1.setText("User List");
+        jLabel1.setText("Employee List");
 
         userListTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -86,33 +94,42 @@ public class MainJFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(userListTable);
 
-        addUserButton.setText("Add User");
+        addUserButton.setText("Add Employee");
         addUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addUserButtonActionPerformed(evt);
             }
         });
 
-        viewUserButton.setText("View User");
+        viewUserButton.setText("View Employee");
         viewUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewUserButtonActionPerformed(evt);
             }
         });
 
-        editUserButton.setText("Edit User");
+        editUserButton.setText("Edit Employee");
         editUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editUserButtonActionPerformed(evt);
             }
         });
 
-        deleteUserButton.setText("Delete User");
+        deleteUserButton.setText("Delete Employee");
         deleteUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteUserButtonActionPerformed(evt);
             }
         });
+
+        filterField.setToolTipText("");
+        filterField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                filterFieldKeyReleased(evt);
+            }
+        });
+
+        jLabel2.setText("Filter:");
 
         javax.swing.GroupLayout listPanelLayout = new javax.swing.GroupLayout(listPanel);
         listPanel.setLayout(listPanelLayout);
@@ -131,7 +148,9 @@ public class MainJFrame extends javax.swing.JFrame {
                             .addComponent(addUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(editUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(deleteUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(viewUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(viewUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2)
+                            .addComponent(filterField))))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
         listPanelLayout.setVerticalGroup(
@@ -148,7 +167,11 @@ public class MainJFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(viewUserButton)
                         .addGap(18, 18, 18)
-                        .addComponent(deleteUserButton))
+                        .addComponent(deleteUserButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(filterField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
@@ -183,6 +206,9 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void deleteUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserButtonActionPerformed
         // TODO add your handling code here:
+        if (checkSelection()) {
+            return;
+        }
         userDirectory.removeUser((String) tableModel.getValueAt(userListTable.getSelectedRow(), 0));
         JOptionPane.showMessageDialog(this,
                 "User deleted successfully",
@@ -192,7 +218,10 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteUserButtonActionPerformed
 
     private void viewUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserButtonActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
+        if (checkSelection()) {
+            return;
+        }
         User user = userDirectory.getUser((String) tableModel.getValueAt(userListTable.getSelectedRow(), 0));
         detailsPanel = new DetailsPanel(mainPanel, user);
         mainPanel.add(detailsPanel, DETAILPANEL);
@@ -206,11 +235,18 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButtonActionPerformed
         // TODO add your handling code here:
-
+        if (checkSelection()) {
+            return;
+        }
         addPanel = new AddPanel(mainPanel, userDirectory, (String) tableModel.getValueAt(userListTable.getSelectedRow(), 0));
         mainPanel.add(addPanel, ADDPANEL);
         cardLayout.show(mainPanel, ADDPANEL);
     }//GEN-LAST:event_editUserButtonActionPerformed
+
+    private void filterFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterFieldKeyReleased
+        // TODO add your handling code here:
+        rowSorter.setRowFilter(RowFilter.regexFilter(filterField.getText().toLowerCase()));
+    }//GEN-LAST:event_filterFieldKeyReleased
 
     /**
      * @param args the command line arguments
@@ -248,16 +284,29 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     private void populateTable() {
-        tableModel = (DefaultTableModel) userListTable.getModel();
         tableModel.setRowCount(0);
         userDirectory.getAllUser().forEach((u) -> tableModel.addRow(new Object[]{u.getEmployeeId(), u.getFirstName() + " " + u.getLastName(), u.getEmail()}));
+    }
+
+    private boolean checkSelection() {
+
+        if (tableModel.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Please add employee first", "No Employee Avilable", JOptionPane.WARNING_MESSAGE);
+            return true;
+        } else if (userListTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Please select employee from table", "No Employee Slected", JOptionPane.WARNING_MESSAGE);
+            return true;
+        }
+        return false;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addUserButton;
     private javax.swing.JButton deleteUserButton;
     private javax.swing.JButton editUserButton;
+    private javax.swing.JTextField filterField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel listPanel;
     private javax.swing.JPanel mainPanel;

@@ -72,6 +72,8 @@
                                   <Component id="editUserButton" alignment="0" max="32767" attributes="0"/>
                                   <Component id="deleteUserButton" max="32767" attributes="0"/>
                                   <Component id="viewUserButton" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="filterField" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -94,6 +96,10 @@
                               <Component id="viewUserButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="deleteUserButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="filterField" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane1" min="-2" pref="405" max="-2" attributes="0"/>
                       </Group>
@@ -108,7 +114,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="20" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="User List"/>
+                <Property name="text" type="java.lang.String" value="Employee List"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -155,7 +161,7 @@
             </Container>
             <Component class="javax.swing.JButton" name="addUserButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Add User"/>
+                <Property name="text" type="java.lang.String" value="Add Employee"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addUserButtonActionPerformed"/>
@@ -163,7 +169,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="viewUserButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="View User"/>
+                <Property name="text" type="java.lang.String" value="View Employee"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewUserButtonActionPerformed"/>
@@ -171,7 +177,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="editUserButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Edit User"/>
+                <Property name="text" type="java.lang.String" value="Edit Employee"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editUserButtonActionPerformed"/>
@@ -179,11 +185,24 @@
             </Component>
             <Component class="javax.swing.JButton" name="deleteUserButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Delete User"/>
+                <Property name="text" type="java.lang.String" value="Delete Employee"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteUserButtonActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="filterField">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="filterFieldKeyReleased"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Filter:"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

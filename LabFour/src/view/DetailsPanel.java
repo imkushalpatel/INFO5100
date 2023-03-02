@@ -100,7 +100,7 @@ public class DetailsPanel extends javax.swing.JPanel {
         jLabel8.setText("Email:");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        jLabel10.setText("User Details");
+        jLabel10.setText("Employee Details");
 
         jLabel9.setText("Employee ID");
 
@@ -111,7 +111,7 @@ public class DetailsPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(275, 275, 275)
                 .addComponent(jLabel10)
-                .addContainerGap(297, Short.MAX_VALUE))
+                .addContainerGap(248, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)

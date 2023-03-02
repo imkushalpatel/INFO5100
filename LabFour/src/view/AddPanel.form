@@ -46,7 +46,7 @@
                   <Component id="startDatePicker" alignment="1" max="32767" attributes="0"/>
                   <Component id="employeeIdField" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="110" max="32767" attributes="0"/>
+              <EmptySpace pref="96" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="uploadImageButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
@@ -148,7 +148,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="saveUserButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Save User"/>
+        <Property name="text" type="java.lang.String" value="Save Employee"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveUserButtonActionPerformed"/>
@@ -187,7 +187,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="titleLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add User"/>
+        <Property name="text" type="java.lang.String" value="Add Employee"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="20" style="1"/>
         </Property>
