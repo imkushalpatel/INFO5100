@@ -7,6 +7,7 @@ package view;
 import data.User;
 import data.UserDirectory;
 import java.awt.CardLayout;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -30,9 +31,10 @@ public class MainJFrame extends javax.swing.JFrame {
     UserDirectory userDirectory;
     DefaultTableModel tableModel;
     TableRowSorter<DefaultTableModel> rowSorter;
-
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("LLLL d, yyyy");
+    
     public MainJFrame() {
-
+        
         initComponents();
         userDirectory = new UserDirectory();
         cardLayout = (CardLayout) mainPanel.getLayout();
@@ -81,17 +83,25 @@ public class MainJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Employee ID", "Name", "Email"
+                "Employee ID", "Name", "Email", "Phone", "Gender", "DOB"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
+        userListTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(userListTable);
 
         addUserButton.setText("Add Employee");
@@ -282,14 +292,21 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
     }
-
+    
     private void populateTable() {
         tableModel.setRowCount(0);
-        userDirectory.getAllUser().forEach((u) -> tableModel.addRow(new Object[]{u.getEmployeeId(), u.getFirstName() + " " + u.getLastName(), u.getEmail()}));
+        userDirectory.getAllUser().forEach((u) -> tableModel.addRow(new Object[]{
+            u.getEmployeeId(),
+            u.getFirstName() + " " + u.getLastName(),
+            u.getEmail(),
+            u.getPhone(),
+            u.getGender(),
+            u.getBirthDate().format(formatter)
+        }));
     }
-
+    
     private boolean checkSelection() {
-
+        
         if (tableModel.getRowCount() == 0) {
             JOptionPane.showMessageDialog(this, "Please add employee first", "No Employee Avilable", JOptionPane.WARNING_MESSAGE);
             return true;
