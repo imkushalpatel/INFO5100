@@ -21,6 +21,7 @@ public class DetailsPanel extends javax.swing.JPanel {
      */
     JPanel mainPanel;
     CardLayout cardLayout;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("LLLL d, yyyy");
 
     public DetailsPanel(JPanel mainPanel, User user) {
         initComponents();
@@ -28,9 +29,9 @@ public class DetailsPanel extends javax.swing.JPanel {
         cardLayout = (CardLayout) mainPanel.getLayout();
         firstNameLabel.setText(user.getFirstName());
         lastNameLabel.setText(user.getLastName());
-        birthDateLabel.setText(user.getBirthDate().format(DateTimeFormatter.ISO_DATE));
+        birthDateLabel.setText(user.getBirthDate().format(formatter));
         genderLabel.setText(user.getGender().toString());
-        startDateLabel.setText(user.getStartDate().format(DateTimeFormatter.ISO_DATE));
+        startDateLabel.setText(user.getStartDate().format(formatter));
         levelLabel.setText(user.getLevel());
         phoneLabel.setText(user.getPhone());
         emailLabel.setText(user.getEmail());
@@ -198,7 +199,6 @@ public class DetailsPanel extends javax.swing.JPanel {
         cardLayout.first(mainPanel);
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel birthDateLabel;

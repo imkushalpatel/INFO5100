@@ -4,7 +4,6 @@
  */
 package view;
 
-import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import data.User;
 import data.UserDirectory;
@@ -12,7 +11,7 @@ import java.awt.CardLayout;
 import java.awt.Image;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.Arrays;
+import java.util.regex.Pattern;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -35,7 +34,6 @@ public class AddPanel extends javax.swing.JPanel {
     CardLayout cardLayout;
     LocalDate today;
     Image profileImage;
-    User user;
 
     public AddPanel(JPanel mainPanel, UserDirectory userDirectory, String employeeId) {
         initComponents();
@@ -262,27 +260,6 @@ public class AddPanel extends javax.swing.JPanel {
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         cardLayout.first(mainPanel);
-
-//        cardLayout.show(mainPanel, MainJFrame.LISTPANEL);
-//        if (user.getFirstName() == null
-//                || user.getLastName() == null
-//                //            || user.getAge() == 0
-//                || user.getPhone() == null
-//                || user.getEmail() == null
-//                //            || user.getAddress() == null
-//                //            || user.getCity() == null
-//                //            || user.getMajor() == null
-//                //            || user.getCountry() == null
-//                || user.getProfileImage() == null) {
-//            JOptionPane.showMessageDialog(this,
-//                    "Save the user details first",
-//                    "View Error",
-//                    JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//        detailsPanel = new DetailsPanel(mainPanel, user);
-//        mainPanel.add(detailsPanel, DETAILPANEL);
-//        cardLayout.show(mainPanel, DETAILPANEL);
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void uploadImageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadImageButtonActionPerformed
@@ -316,6 +293,13 @@ public class AddPanel extends javax.swing.JPanel {
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (levelField.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this,
+                    "Level should not be empty",
+                    "Input Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         if (phoneField.getText().isBlank()) {
             JOptionPane.showMessageDialog(this,
@@ -324,23 +308,17 @@ public class AddPanel extends javax.swing.JPanel {
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (emailField.getText().isBlank()) {
+
+        if (!Pattern.matches("^\\d*$", phoneField.getText())) {
             JOptionPane.showMessageDialog(this,
-                    "Email should not be empty",
+                    "Number only accepted in Phone field",
                     "Input Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (levelField.getText().isBlank()) {
+        if (phoneField.getText().length() < 10 || phoneField.getText().length() > 10) {
             JOptionPane.showMessageDialog(this,
-                    "Address should not be empty",
-                    "Input Error",
-                    JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (phoneField.getText().isBlank()) {
-            JOptionPane.showMessageDialog(this,
-                    "City should not be empty",
+                    "Phone number size can not be more or less than 10 character",
                     "Input Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
@@ -348,6 +326,13 @@ public class AddPanel extends javax.swing.JPanel {
         if (emailField.getText().isBlank()) {
             JOptionPane.showMessageDialog(this,
                     "Country should not be empty",
+                    "Input Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!Pattern.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", emailField.getText())) {
+            JOptionPane.showMessageDialog(this,
+                    "Email invalid",
                     "Input Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
@@ -381,7 +366,6 @@ public class AddPanel extends javax.swing.JPanel {
         cardLayout.first(mainPanel);
 
     }//GEN-LAST:event_saveUserButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;

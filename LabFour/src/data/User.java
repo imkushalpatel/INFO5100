@@ -58,7 +58,6 @@ public class User {
     public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
     }
-    
 
     public void generateEmployeeId() {
         this.employeeId = User.EMPLOYEEIDINITIAL + User.employeeIdCount++;
