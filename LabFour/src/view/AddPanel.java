@@ -91,31 +91,31 @@ public class AddPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         firstNameField = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        genderLabel = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
         emailField = new javax.swing.JTextField();
         uploadImageButton = new javax.swing.JButton();
         saveUserButton = new javax.swing.JButton();
         genderComboBox = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
+        levelLabel = new javax.swing.JLabel();
         startDatePicker = new com.github.lgooddatepicker.components.DatePicker();
-        jLabel2 = new javax.swing.JLabel();
+        firstNameLabel = new javax.swing.JLabel();
         lastNameField = new javax.swing.JTextField();
         levelField = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        birthLabel = new javax.swing.JLabel();
         titleLabel = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        imagePanel = new javax.swing.JPanel();
         imageView = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        phoneLabel = new javax.swing.JLabel();
         birthDatePicker = new com.github.lgooddatepicker.components.DatePicker();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        startLabel = new javax.swing.JLabel();
+        emailLabel = new javax.swing.JLabel();
         phoneField = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        lastNameLabel = new javax.swing.JLabel();
         employeeIdLabel = new javax.swing.JLabel();
         employeeIdField = new javax.swing.JTextField();
 
-        jLabel5.setText("Gender");
+        genderLabel.setText("Gender");
 
         backButton.setText("Go Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -140,27 +140,27 @@ public class AddPanel extends javax.swing.JPanel {
 
         genderComboBox.setModel(new DefaultComboBoxModel<User.Gender>(User.Gender.values())    );
 
-        jLabel7.setText("Level");
+        levelLabel.setText("Level");
 
-        jLabel2.setText("First Name");
+        firstNameLabel.setText("First Name");
 
-        jLabel4.setText("DOB");
+        birthLabel.setText("DOB");
 
         titleLabel.setText("Add Employee");
         titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        imagePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         imageView.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(imageView, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        imagePanel.add(imageView, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jLabel8.setText("Phone");
+        phoneLabel.setText("Phone");
 
-        jLabel6.setText("Start Date");
+        startLabel.setText("Start Date");
 
-        jLabel9.setText("Email");
+        emailLabel.setText("Email");
 
-        jLabel3.setText("Last Name");
+        lastNameLabel.setText("Last Name");
 
         employeeIdLabel.setText("Employee ID");
 
@@ -178,14 +178,14 @@ public class AddPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
+                    .addComponent(firstNameLabel)
+                    .addComponent(lastNameLabel)
+                    .addComponent(birthLabel)
+                    .addComponent(genderLabel)
+                    .addComponent(startLabel)
+                    .addComponent(levelLabel)
+                    .addComponent(phoneLabel)
+                    .addComponent(emailLabel)
                     .addComponent(employeeIdLabel))
                 .addGap(100, 100, 100)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -201,7 +201,7 @@ public class AddPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(uploadImageButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(imagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(saveUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(73, 73, 73))
@@ -215,39 +215,39 @@ public class AddPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
+                            .addComponent(firstNameLabel)
                             .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
+                            .addComponent(lastNameLabel)
                             .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
+                            .addComponent(birthLabel)
                             .addComponent(birthDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
+                            .addComponent(genderLabel)
                             .addComponent(genderComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(imagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addComponent(startLabel)
                     .addComponent(uploadImageButton)
                     .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                    .addComponent(levelLabel)
                     .addComponent(levelField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(saveUserButton))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
+                    .addComponent(phoneLabel)
                     .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backButton))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
+                    .addComponent(emailLabel)
                     .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -370,26 +370,26 @@ public class AddPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private com.github.lgooddatepicker.components.DatePicker birthDatePicker;
+    private javax.swing.JLabel birthLabel;
     private javax.swing.JTextField emailField;
+    private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField employeeIdField;
     private javax.swing.JLabel employeeIdLabel;
     private javax.swing.JTextField firstNameField;
+    private javax.swing.JLabel firstNameLabel;
     private javax.swing.JComboBox<User.Gender> genderComboBox;
+    private javax.swing.JLabel genderLabel;
+    private javax.swing.JPanel imagePanel;
     private javax.swing.JLabel imageView;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField lastNameField;
+    private javax.swing.JLabel lastNameLabel;
     private javax.swing.JTextField levelField;
+    private javax.swing.JLabel levelLabel;
     private javax.swing.JTextField phoneField;
+    private javax.swing.JLabel phoneLabel;
     private javax.swing.JButton saveUserButton;
     private com.github.lgooddatepicker.components.DatePicker startDatePicker;
+    private javax.swing.JLabel startLabel;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JButton uploadImageButton;
     // End of variables declaration//GEN-END:variables

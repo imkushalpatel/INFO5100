@@ -55,15 +55,15 @@ public class MainJFrame extends javax.swing.JFrame {
 
         mainPanel = new javax.swing.JPanel();
         listPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        titleLabel = new javax.swing.JLabel();
+        tableScrollPane = new javax.swing.JScrollPane();
         userListTable = new javax.swing.JTable();
         addUserButton = new javax.swing.JButton();
         viewUserButton = new javax.swing.JButton();
         editUserButton = new javax.swing.JButton();
         deleteUserButton = new javax.swing.JButton();
         filterField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        filterLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,8 +75,8 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        jLabel1.setText("Employee List");
+        titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        titleLabel.setText("Employee List");
 
         userListTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -102,7 +102,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
         userListTable.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(userListTable);
+        tableScrollPane.setViewportView(userListTable);
 
         addUserButton.setText("Add Employee");
         addUserButton.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +139,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Filter:");
+        filterLabel.setText("Filter:");
 
         javax.swing.GroupLayout listPanelLayout = new javax.swing.GroupLayout(listPanel);
         listPanel.setLayout(listPanelLayout);
@@ -149,17 +149,17 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(listPanelLayout.createSequentialGroup()
                         .addGap(282, 282, 282)
-                        .addComponent(jLabel1))
+                        .addComponent(titleLabel))
                     .addGroup(listPanelLayout.createSequentialGroup()
                         .addGap(49, 49, 49)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(addUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(editUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(deleteUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(viewUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2)
+                            .addComponent(filterLabel)
                             .addComponent(filterField))))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
@@ -167,7 +167,7 @@ public class MainJFrame extends javax.swing.JFrame {
             listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(listPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(titleLabel)
                 .addGap(18, 18, 18)
                 .addGroup(listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(listPanelLayout.createSequentialGroup()
@@ -179,10 +179,10 @@ public class MainJFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(deleteUserButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
+                        .addComponent(filterLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(filterField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
@@ -322,11 +322,11 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton deleteUserButton;
     private javax.swing.JButton editUserButton;
     private javax.swing.JTextField filterField;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel filterLabel;
     private javax.swing.JPanel listPanel;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JScrollPane tableScrollPane;
+    private javax.swing.JLabel titleLabel;
     private javax.swing.JTable userListTable;
     private javax.swing.JButton viewUserButton;
     // End of variables declaration//GEN-END:variables
