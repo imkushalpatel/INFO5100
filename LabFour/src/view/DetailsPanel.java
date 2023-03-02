@@ -21,11 +21,9 @@ public class DetailsPanel extends javax.swing.JPanel {
      */
     JPanel mainPanel;
     CardLayout cardLayout;
-    User user;
 
     public DetailsPanel(JPanel mainPanel, User user) {
         initComponents();
-        this.user = user;
         this.mainPanel = mainPanel;
         cardLayout = (CardLayout) mainPanel.getLayout();
         firstNameLabel.setText(user.getFirstName());
@@ -36,6 +34,7 @@ public class DetailsPanel extends javax.swing.JPanel {
         levelLabel.setText(user.getLevel());
         phoneLabel.setText(user.getPhone());
         emailLabel.setText(user.getEmail());
+        employeeIdLabel.setText(user.getEmployeeId());
         imageView.setIcon(new ImageIcon(user.getProfileImage()));
 
     }
@@ -69,6 +68,8 @@ public class DetailsPanel extends javax.swing.JPanel {
         phoneLabel = new javax.swing.JLabel();
         emailLabel = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        employeeIdLabel = new javax.swing.JLabel();
 
         jButton1.setText("Go Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -101,13 +102,20 @@ public class DetailsPanel extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel10.setText("User Details");
 
+        jLabel9.setText("Employee ID");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(188, Short.MAX_VALUE)
+                .addGap(275, 275, 275)
+                .addComponent(jLabel10)
+                .addContainerGap(297, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9)
                     .addComponent(jLabel6)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -132,19 +140,16 @@ public class DetailsPanel extends javax.swing.JPanel {
                     .addComponent(startDateLabel)
                     .addComponent(levelLabel)
                     .addComponent(phoneLabel)
-                    .addComponent(emailLabel))
-                .addContainerGap(189, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel10)
+                    .addComponent(emailLabel)
+                    .addComponent(employeeIdLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(11, 11, 11)
                 .addComponent(jLabel10)
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,16 +182,20 @@ public class DetailsPanel extends javax.swing.JPanel {
                     .addComponent(phoneLabel)
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(emailLabel))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(employeeIdLabel))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        cardLayout.show(mainPanel, MainJFrame.ADDPANEL);
+        cardLayout.first(mainPanel);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -194,6 +203,7 @@ public class DetailsPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel birthDateLabel;
     private javax.swing.JLabel emailLabel;
+    private javax.swing.JLabel employeeIdLabel;
     private javax.swing.JLabel firstNameLabel;
     private javax.swing.JLabel genderLabel;
     private javax.swing.JLabel imageView;
@@ -207,6 +217,7 @@ public class DetailsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JLabel levelLabel;

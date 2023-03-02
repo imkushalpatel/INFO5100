@@ -7,12 +7,8 @@ package view;
 import data.User;
 import data.UserDirectory;
 import java.awt.CardLayout;
-import java.awt.Image;
-import java.util.regex.Pattern;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,20 +21,19 @@ public class MainJFrame extends javax.swing.JFrame {
      */
     final static String ADDPANEL = "ADD";
     final static String DETAILPANEL = "DETAIL";
-    final static String LISTPANEL ="LIST";
+    final static String LISTPANEL = "LIST";
     CardLayout cardLayout;
     DetailsPanel detailsPanel;
+    AddPanel addPanel;
     UserDirectory userDirectory;
+    DefaultTableModel tableModel;
 
     public MainJFrame() {
-        
-        initComponents();
-        userDirectory=new UserDirectory();
-//        detailsPanel = new DetailsPanel(mainPanel, user);
-        cardLayout = (CardLayout) mainPanel.getLayout();
-//        mainPanel.add(detailsPanel, DETAILPANEL);
-//        imageView.setIcon(new ImageIcon(new ImageIcon("src/view/profile.jpg").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)));
 
+        initComponents();
+        userDirectory = new UserDirectory();
+        cardLayout = (CardLayout) mainPanel.getLayout();
+        populateTable();
     }
 
     /**
@@ -56,13 +51,19 @@ public class MainJFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         userListTable = new javax.swing.JTable();
         addUserButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        viewUserButton = new javax.swing.JButton();
+        editUserButton = new javax.swing.JButton();
+        deleteUserButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         mainPanel.setLayout(new java.awt.CardLayout());
+
+        listPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                listPanelComponentShown(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel1.setText("User List");
@@ -92,14 +93,24 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("View User");
-
-        jButton2.setText("Edit User");
-
-        jButton3.setText("Delete User");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        viewUserButton.setText("View User");
+        viewUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                viewUserButtonActionPerformed(evt);
+            }
+        });
+
+        editUserButton.setText("Edit User");
+        editUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editUserButtonActionPerformed(evt);
+            }
+        });
+
+        deleteUserButton.setText("Delete User");
+        deleteUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteUserButtonActionPerformed(evt);
             }
         });
 
@@ -118,9 +129,9 @@ public class MainJFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(addUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(editUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(deleteUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(viewUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
         listPanelLayout.setVerticalGroup(
@@ -133,11 +144,11 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addGroup(listPanelLayout.createSequentialGroup()
                         .addComponent(addUserButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(editUserButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addComponent(viewUserButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3))
+                        .addComponent(deleteUserButton))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
@@ -165,11 +176,41 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void addUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserButtonActionPerformed
         // TODO add your handling code here:
+        addPanel = new AddPanel(mainPanel, userDirectory, null);
+        mainPanel.add(addPanel, ADDPANEL);
+        cardLayout.show(mainPanel, ADDPANEL);
     }//GEN-LAST:event_addUserButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void deleteUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        userDirectory.removeUser((String) tableModel.getValueAt(userListTable.getSelectedRow(), 0));
+        JOptionPane.showMessageDialog(this,
+                "User deleted successfully",
+                "Success",
+                JOptionPane.INFORMATION_MESSAGE);
+        populateTable();
+    }//GEN-LAST:event_deleteUserButtonActionPerformed
+
+    private void viewUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserButtonActionPerformed
+        // TODO add your handling code here:
+        User user = userDirectory.getUser((String) tableModel.getValueAt(userListTable.getSelectedRow(), 0));
+        detailsPanel = new DetailsPanel(mainPanel, user);
+        mainPanel.add(detailsPanel, DETAILPANEL);
+        cardLayout.show(mainPanel, DETAILPANEL);
+    }//GEN-LAST:event_viewUserButtonActionPerformed
+
+    private void listPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_listPanelComponentShown
+        // TODO add your handling code here:
+        populateTable();
+    }//GEN-LAST:event_listPanelComponentShown
+
+    private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButtonActionPerformed
+        // TODO add your handling code here:
+
+        addPanel = new AddPanel(mainPanel, userDirectory, (String) tableModel.getValueAt(userListTable.getSelectedRow(), 0));
+        mainPanel.add(addPanel, ADDPANEL);
+        cardLayout.show(mainPanel, ADDPANEL);
+    }//GEN-LAST:event_editUserButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,15 +247,21 @@ public class MainJFrame extends javax.swing.JFrame {
         });
     }
 
+    private void populateTable() {
+        tableModel = (DefaultTableModel) userListTable.getModel();
+        tableModel.setRowCount(0);
+        userDirectory.getAllUser().forEach((u) -> tableModel.addRow(new Object[]{u.getEmployeeId(), u.getFirstName() + " " + u.getLastName(), u.getEmail()}));
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addUserButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton deleteUserButton;
+    private javax.swing.JButton editUserButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel listPanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTable userListTable;
+    private javax.swing.JButton viewUserButton;
     // End of variables declaration//GEN-END:variables
 }

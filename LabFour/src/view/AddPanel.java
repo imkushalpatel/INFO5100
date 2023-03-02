@@ -4,11 +4,20 @@
  */
 package view;
 
+import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
 import data.User;
+import data.UserDirectory;
+import java.awt.CardLayout;
 import java.awt.Image;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.Arrays;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -20,9 +29,58 @@ public class AddPanel extends javax.swing.JPanel {
     /**
      * Creates new form ListPanel
      */
+    String employeeId;
+    UserDirectory userDirectory;
+    JPanel mainPanel;
+    CardLayout cardLayout;
+    LocalDate today;
+    Image profileImage;
     User user;
-    public AddPanel() {
+
+    public AddPanel(JPanel mainPanel, UserDirectory userDirectory, String employeeId) {
         initComponents();
+        today = LocalDate.now();
+        this.mainPanel = mainPanel;
+        this.employeeId = employeeId;
+        cardLayout = (CardLayout) mainPanel.getLayout();
+        this.userDirectory = userDirectory;
+//        genderComboBox.setModel(new DefaultComboBoxModel<>(User.Gender.values()));
+        DatePickerSettings birthDateSettings = new DatePickerSettings();
+        birthDateSettings.setAllowKeyboardEditing(false);
+        birthDateSettings.setAllowEmptyDates(false);
+        birthDateSettings.setFirstDayOfWeek(DayOfWeek.MONDAY);
+        birthDatePicker.setSettings(birthDateSettings);
+        DatePickerSettings startDateSettings = new DatePickerSettings();
+        startDateSettings.setAllowKeyboardEditing(false);
+        startDateSettings.setAllowEmptyDates(false);
+        startDateSettings.setFirstDayOfWeek(DayOfWeek.MONDAY);
+        startDatePicker.setSettings(startDateSettings);
+
+        birthDateSettings.setDateRangeLimits(LocalDate.MIN, today.minusYears(18));
+
+        if (employeeId != null) {
+            titleLabel.setText("Edit User");
+            User user = userDirectory.getUser(employeeId);
+            imageView.setIcon(new ImageIcon(user.getProfileImage()));
+            birthDatePicker.setDate(user.getBirthDate());
+            startDateSettings.setDateRangeLimits(user.getStartDate(), LocalDate.MAX);
+            startDatePicker.setDate(user.getStartDate());
+            firstNameField.setText(user.getFirstName());
+            lastNameField.setText(user.getLastName());
+            genderComboBox.setSelectedItem(user.getGender());
+            levelField.setText(user.getLevel());
+            phoneField.setText(user.getPhone());
+            emailField.setText(user.getEmail());
+            profileImage = user.getProfileImage();
+            employeeIdField.setText(employeeId);
+        } else {
+            imageView.setIcon(new ImageIcon(new ImageIcon(User.DEFAULTIMAGE).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)));
+            birthDatePicker.setDate(today.minusYears(18));
+            startDateSettings.setDateRangeLimits(today, LocalDate.MAX);
+            startDatePicker.setDate(today);
+            employeeIdField.setVisible(false);
+            employeeIdLabel.setVisible(false);
+        }
     }
 
     /**
@@ -36,33 +94,35 @@ public class AddPanel extends javax.swing.JPanel {
 
         firstNameField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        viewUserButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
         emailField = new javax.swing.JTextField();
         uploadImageButton = new javax.swing.JButton();
         saveUserButton = new javax.swing.JButton();
         genderComboBox = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        datePickerStartDate = new com.github.lgooddatepicker.components.DatePicker();
+        startDatePicker = new com.github.lgooddatepicker.components.DatePicker();
         jLabel2 = new javax.swing.JLabel();
         lastNameField = new javax.swing.JTextField();
         levelField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        titleLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         imageView = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        datePickerBirthDate = new com.github.lgooddatepicker.components.DatePicker();
+        birthDatePicker = new com.github.lgooddatepicker.components.DatePicker();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         phoneField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        employeeIdLabel = new javax.swing.JLabel();
+        employeeIdField = new javax.swing.JTextField();
 
         jLabel5.setText("Gender");
 
-        viewUserButton.setText("View Details");
-        viewUserButton.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setText("Go Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewUserButtonActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -73,14 +133,14 @@ public class AddPanel extends javax.swing.JPanel {
             }
         });
 
-        saveUserButton.setText("Save Details");
+        saveUserButton.setText("Save User");
         saveUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveUserButtonActionPerformed(evt);
             }
         });
 
-        genderComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        genderComboBox.setModel(new DefaultComboBoxModel<User.Gender>(User.Gender.values())    );
 
         jLabel7.setText("Level");
 
@@ -88,8 +148,8 @@ public class AddPanel extends javax.swing.JPanel {
 
         jLabel4.setText("DOB");
 
-        jLabel1.setText("Enter User Details");
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        titleLabel.setText("Add User");
+        titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -104,10 +164,19 @@ public class AddPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Last Name");
 
+        employeeIdLabel.setText("Employee ID");
+
+        employeeIdField.setEditable(false);
+        employeeIdField.setFocusable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(titleLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,34 +187,32 @@ public class AddPanel extends javax.swing.JPanel {
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel9))
+                    .addComponent(jLabel9)
+                    .addComponent(employeeIdLabel))
                 .addGap(100, 100, 100)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(emailField, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(phoneField, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(levelField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(datePickerBirthDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addComponent(birthDatePicker, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                     .addComponent(lastNameField, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(firstNameField, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(genderComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(datePickerStartDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                    .addComponent(startDatePicker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(employeeIdField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(uploadImageButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(saveUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(viewUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(73, 73, 73))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(titleLabel)
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -159,7 +226,7 @@ public class AddPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(datePickerBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(birthDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -169,7 +236,7 @@ public class AddPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(uploadImageButton)
-                    .addComponent(datePickerStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -179,50 +246,56 @@ public class AddPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewUserButton))
+                    .addComponent(backButton))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(employeeIdLabel)
+                    .addComponent(employeeIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void viewUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserButtonActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        if (user.getFirstName() == null
-            || user.getLastName() == null
-//            || user.getAge() == 0
-            || user.getPhone() == null
-            || user.getEmail() == null
-//            || user.getAddress() == null
-//            || user.getCity() == null
-//            || user.getMajor() == null
-//            || user.getCountry() == null
-            || user.getProfileImage() == null) {
-            JOptionPane.showMessageDialog(this,
-                "Save the user details first",
-                "View Error",
-                JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        cardLayout.first(mainPanel);
+
+//        cardLayout.show(mainPanel, MainJFrame.LISTPANEL);
+//        if (user.getFirstName() == null
+//                || user.getLastName() == null
+//                //            || user.getAge() == 0
+//                || user.getPhone() == null
+//                || user.getEmail() == null
+//                //            || user.getAddress() == null
+//                //            || user.getCity() == null
+//                //            || user.getMajor() == null
+//                //            || user.getCountry() == null
+//                || user.getProfileImage() == null) {
+//            JOptionPane.showMessageDialog(this,
+//                    "Save the user details first",
+//                    "View Error",
+//                    JOptionPane.ERROR_MESSAGE);
+//            return;
+//        }
 //        detailsPanel = new DetailsPanel(mainPanel, user);
 //        mainPanel.add(detailsPanel, DETAILPANEL);
 //        cardLayout.show(mainPanel, DETAILPANEL);
-    }//GEN-LAST:event_viewUserButtonActionPerformed
+    }//GEN-LAST:event_backButtonActionPerformed
 
     private void uploadImageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadImageButtonActionPerformed
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
         chooser.addChoosableFileFilter(new FileNameExtensionFilter(
-            "Image Files", "jpg", "jpeg", "tiff", "tif", "png", "gif"));
-    chooser.setAcceptAllFileFilterUsed(false);
-    int returnVal = chooser.showOpenDialog(this);
-    if (returnVal == JFileChooser.APPROVE_OPTION) {
-        System.out.println("file: " + chooser.getSelectedFile().getAbsolutePath());
-        Image image = new ImageIcon(chooser.getSelectedFile().getAbsolutePath()).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
-        imageView.setIcon(new ImageIcon(image));
-        user.setProfileImage(image);
+                "Image Files", "jpg", "jpeg", "tiff", "tif", "png", "gif"));
+        chooser.setAcceptAllFileFilterUsed(false);
+        int returnVal = chooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            System.out.println("file: " + chooser.getSelectedFile().getAbsolutePath());
+            profileImage = new ImageIcon(chooser.getSelectedFile().getAbsolutePath()).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+            imageView.setIcon(new ImageIcon(profileImage));
         }
 
     }//GEN-LAST:event_uploadImageButtonActionPerformed
@@ -231,86 +304,94 @@ public class AddPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (firstNameField.getText().isBlank()) {
             JOptionPane.showMessageDialog(this,
-                "First Name should not be empty",
-                "Input Error",
-                JOptionPane.ERROR_MESSAGE);
+                    "First Name should not be empty",
+                    "Input Error",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (lastNameField.getText().isBlank()) {
             JOptionPane.showMessageDialog(this,
-                "Last Name should not be empty",
-                "Input Error",
-                JOptionPane.ERROR_MESSAGE);
+                    "Last Name should not be empty",
+                    "Input Error",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
-    
-       
+
         if (phoneField.getText().isBlank()) {
             JOptionPane.showMessageDialog(this,
-                "Phone should not be empty",
-                "Input Error",
-                JOptionPane.ERROR_MESSAGE);
+                    "Phone should not be empty",
+                    "Input Error",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (emailField.getText().isBlank()) {
             JOptionPane.showMessageDialog(this,
-                "Email should not be empty",
-                "Input Error",
-                JOptionPane.ERROR_MESSAGE);
+                    "Email should not be empty",
+                    "Input Error",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (levelField.getText().isBlank()) {
             JOptionPane.showMessageDialog(this,
-                "Address should not be empty",
-                "Input Error",
-                JOptionPane.ERROR_MESSAGE);
+                    "Address should not be empty",
+                    "Input Error",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (phoneField.getText().isBlank()) {
             JOptionPane.showMessageDialog(this,
-                "City should not be empty",
-                "Input Error",
-                JOptionPane.ERROR_MESSAGE);
+                    "City should not be empty",
+                    "Input Error",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (emailField.getText().isBlank()) {
             JOptionPane.showMessageDialog(this,
-                "Country should not be empty",
-                "Input Error",
-                JOptionPane.ERROR_MESSAGE);
+                    "Country should not be empty",
+                    "Input Error",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        if (user.getProfileImage() == null) {
-            JOptionPane.showMessageDialog(this,
-                "Please select an photo",
-                "Input Error",
-                JOptionPane.ERROR_MESSAGE);
-            return;
+        User user = new User(
+                firstNameField.getText(),
+                lastNameField.getText(),
+                (User.Gender) genderComboBox.getSelectedItem(),
+                birthDatePicker.getDate(),
+                startDatePicker.getDate(),
+                phoneField.getText(),
+                emailField.getText(),
+                levelField.getText()
+        );
+        if (profileImage == null) {
+            user.setDefaultProfileImage();
+        } else {
+            user.setProfileImage(profileImage);
         }
-        user.setFirstName(firstNameField.getText());
-        user.setLastName(lastNameField.getText());
-       
-        user.setPhone(phoneField.getText());
-        user.setEmail(emailField.getText());
-        
-        
- 
+        if (employeeId == null) {
+            userDirectory.addUser(user);
+        } else {
+            user.setEmployeeId(employeeId);
+            userDirectory.updateUser(employeeId, user);
+        }
         JOptionPane.showMessageDialog(this,
-            "User saved successfully",
-            "Success",
-            JOptionPane.INFORMATION_MESSAGE);
+                "User saved successfully",
+                "Success",
+                JOptionPane.INFORMATION_MESSAGE);
+
+        cardLayout.first(mainPanel);
+
     }//GEN-LAST:event_saveUserButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.github.lgooddatepicker.components.DatePicker datePickerBirthDate;
-    private com.github.lgooddatepicker.components.DatePicker datePickerStartDate;
+    private javax.swing.JButton backButton;
+    private com.github.lgooddatepicker.components.DatePicker birthDatePicker;
     private javax.swing.JTextField emailField;
+    private javax.swing.JTextField employeeIdField;
+    private javax.swing.JLabel employeeIdLabel;
     private javax.swing.JTextField firstNameField;
-    private javax.swing.JComboBox<String> genderComboBox;
+    private javax.swing.JComboBox<User.Gender> genderComboBox;
     private javax.swing.JLabel imageView;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -324,7 +405,8 @@ public class AddPanel extends javax.swing.JPanel {
     private javax.swing.JTextField levelField;
     private javax.swing.JTextField phoneField;
     private javax.swing.JButton saveUserButton;
+    private com.github.lgooddatepicker.components.DatePicker startDatePicker;
+    private javax.swing.JLabel titleLabel;
     private javax.swing.JButton uploadImageButton;
-    private javax.swing.JButton viewUserButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -18,11 +18,11 @@ public class UserDirectory {
         userList = new ArrayList<>();
     }
 
-    ArrayList<User> getAllUser() {
+    public ArrayList<User> getAllUser() {
         return userList;
     }
 
-    User getUser(String employeeId) {
+    public User getUser(String employeeId) {
         return userList.stream().filter((u) -> u.getEmployeeId().equals(employeeId)).findAny().get();
     }
 

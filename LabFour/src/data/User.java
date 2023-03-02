@@ -16,6 +16,7 @@ public class User {
 
     public static final String EMPLOYEEIDINITIAL = "EMP";
     static int employeeIdCount = 0;
+    public static final String DEFAULTIMAGE = "src/view/profile.jpg";
 
     String firstName;
     String lastName;
@@ -23,7 +24,6 @@ public class User {
 
     public enum Gender {
         MALE, FEMALE, OTHER;
-
     }
     Gender gender;
     LocalDate birthDate;
@@ -54,6 +54,11 @@ public class User {
     public String getEmployeeId() {
         return employeeId;
     }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
+    }
+    
 
     public void generateEmployeeId() {
         this.employeeId = User.EMPLOYEEIDINITIAL + User.employeeIdCount++;
@@ -132,7 +137,7 @@ public class User {
     }
 
     public void setDefaultProfileImage() {
-        this.profileImage = new ImageIcon("src/view/profile.jpg").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+        this.profileImage = new ImageIcon(DEFAULTIMAGE).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
     }
 
 }
