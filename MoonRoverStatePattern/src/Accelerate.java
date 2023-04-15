@@ -50,8 +50,7 @@ public class Accelerate extends Forward {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.getClass().getSuperclass().getName() + '.' + this.getClass().getName();
+		return super.toString() + '.' + getClass().getName();
 	}
 
 }

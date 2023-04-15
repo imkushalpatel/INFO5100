@@ -39,5 +39,9 @@ public class AtRest implements State {
 		}
 	
 	}
+	@Override
+	public String toString() {
+		return getClass().getName();
+	}
 
 }

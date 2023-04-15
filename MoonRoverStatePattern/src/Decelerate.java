@@ -45,4 +45,9 @@ public class Decelerate extends Forward {
 
 	}
 
+	@Override
+	public String toString() {
+		return super.toString() + '.' + getClass().getName();
+	}
+
 }

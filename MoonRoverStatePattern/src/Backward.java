@@ -14,4 +14,9 @@ public class Backward implements State {
 		context.setState(new AtRest());
 	}
 
+	@Override
+	public String toString() {
+		return getClass().getName();
+	}
+
 }

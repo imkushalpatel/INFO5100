@@ -19,7 +19,7 @@ public class Forward implements State {
 
 	@Override
 	public String toString() {
-		return super.getClass().getName();
+		return Forward.class.getName();
 	}
 
 }
