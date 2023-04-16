@@ -6,18 +6,23 @@ public class Thread1 extends Thread {
 
 	@Override
 	public void run() {
+		try {
+			FilePlayer filePlayer = new FilePlayer();
 
-		FilePlayer filePlayer = new FilePlayer();
+			filePlayer.syncPlay(Tones.DO);
+			sleep(1000);
+			filePlayer.syncPlay(Tones.MI);
+			sleep(2000);
+			filePlayer.syncPlay(Tones.SOL);
+			sleep(2000);
+			filePlayer.syncPlay(Tones.SI);
+			sleep(2000);
+			filePlayer.asyncPlay(Tones.DO_OCTAVE);
+			sleep(1000);
 
-		filePlayer.syncPlay(Tones.DO);
-
-		filePlayer.syncPlay(Tones.MI);
-
-		filePlayer.syncPlay(Tones.SOL);
-
-		filePlayer.syncPlay(Tones.SI);
-
-		filePlayer.asyncPlay(Tones.DO_OCTAVE);
-
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

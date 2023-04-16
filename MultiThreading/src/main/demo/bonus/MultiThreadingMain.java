@@ -1,4 +1,4 @@
-package main.demo;
+package main.demo.bonus;
 
 public class MultiThreadingMain {
 
